@@ -7,8 +7,12 @@ import javafx.scene.Scene;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 import javafx.stage.WindowEvent;
+import sample.Main;
 
 import java.io.IOException;
+import java.io.InputStream;
+import java.net.URISyntaxException;
+import java.nio.charset.Charset;
 
 
 /**
@@ -44,8 +48,9 @@ public class SimpleMediaPlayer extends AnchorPane {
     //构造函数私有，实例保存在静态域，只向外部提供静态调用
     private SimpleMediaPlayer(String mediaUrl){
         try {
-            FXMLLoader fxmlloader = new FXMLLoader(getClass().getResource("player.fxml"));
-            Parent root = fxmlloader.load();   //将fxml节点添加到根节点中
+            InputStream in = Main.class.getResourceAsStream("fxml/player.fxml");
+            FXMLLoader fxmlloader = new FXMLLoader();
+            Parent root = fxmlloader.load(in);   //将fxml节点添加到根节点中
             controller = fxmlloader.getController();
             this.getChildren().add(root);   //主类节点加入根节点
             System.out.println("player add in the root");
@@ -88,6 +93,7 @@ public class SimpleMediaPlayer extends AnchorPane {
      */
     public static SimpleMediaPlayer newInstance(String mediaUrl,int width,int height){
         simpleMediaPlayer = new SimpleMediaPlayer(mediaUrl);
+        System.out.println(mediaUrl);
         simpleMediaPlayer.getController().start(mediaUrl,width,height);   //非窗口化启动播放器控件
         return simpleMediaPlayer;
     }

@@ -121,6 +121,7 @@
                     <include>**/orderListComponent/*.css</include>
                     <include>**/timePickerComponent/*.css</include>
                     <include>**/timePickerComponent/*.fxml</include>
+                    <include>**/*.json</include>
 
 
                     <!-- 如果想要弄个包名专门放fxml文件，像上一行这样添加设置 -->
@@ -173,7 +174,7 @@
                                 <option>--add-exports</option>
                                 <option>javafx.base/com.sun.javafx.event=com.jfoenix</option>
                             </options>
-                            <mainClass>sample.Main</mainClass>
+                            <mainClass>sample.AppLancher</mainClass>
                         </configuration>
                     </execution>
                     <execution>
@@ -207,7 +208,7 @@
                                 <option>--add-exports</option>
                                 <option>javafx.base/com.sun.javafx.event=com.jfoenix</option>
                             </options>
-                            <mainClass>sample.Main</mainClass>
+                            <mainClass>sample.AppLancher</mainClass>
                         </configuration>
                     </execution>
                 </executions>
@@ -224,10 +225,11 @@
                         </goals>
                         <configuration>
                             <transformers>
+                                <transformer implementation="org.apache.maven.plugins.shade.resource.ServicesResourceTransformer"></transformer>
                                 <transformer
                                         implementation="org.apache.maven.plugins.shade.resource.ManifestResourceTransformer">
                                     <!-- 加载主类 -->
-                                    <mainClass>sample.Main</mainClass>
+                                    <mainClass>sample.AppLancher</mainClass>
                                 </transformer>
                             </transformers>
                         </configuration>

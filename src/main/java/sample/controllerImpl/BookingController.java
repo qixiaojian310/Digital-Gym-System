@@ -655,7 +655,7 @@ public class BookingController implements Initializable, GetLoginUserable {
      * By using Java IO, save the paths into a map.
      */
     public void InitMonthPicPath(){
-        File filePath = new File(getClass().getResource("../pic/month").getPath());
+        File filePath = new File("src/main/java/sample/pic/month");
         String path = filePath.toString();
         path = URLDecoder.decode(path, StandardCharsets.UTF_8);
         File file = new File(path);

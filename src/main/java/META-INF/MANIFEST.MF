@@ -1,0 +1,9 @@
+Manifest-Version: 1.0
+Main-Class: sample.AppLancher
+Class-Path: javafx-media-16.jar javafx-graphics-16-win.jar javafx-graphi
+ cs-16.jar javafx-fxml-16-win.jar jfoenix-9.0.10.jar ikonli-core-12.2.0.
+ jar jackson-annotations-2.9.6.jar javafx-media-16-win.jar ikonli-javafx
+ -12.2.0.jar javafx-controls-16.jar jackson-databind-2.9.6.jar javafx-ba
+ se-16-win.jar ikonli-fontawesome-pack-12.2.0.jar javafx-base-16.jar jac
+ kson-core-2.9.6.jar javafx-controls-16-win.jar javafx-fxml-16.jar
+

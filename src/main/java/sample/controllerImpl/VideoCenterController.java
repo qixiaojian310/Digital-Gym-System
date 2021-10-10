@@ -140,30 +140,32 @@ public class VideoCenterController implements Initializable {
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         videoList.setAlignment(Pos.CENTER);
-        File filePath = new File(getClass().getResource("videoListComponent/pic").getPath());
-        String path = filePath.toString();
-        path = URLDecoder.decode(path, StandardCharsets.UTF_8);
-        File file = new File(path);
-        File[] files = file.listFiles();
-        for(File f:files){					//遍历File[]数组
-            if(!f.isDirectory()) {        //若非目录(即文件)，则打印
-                VideoListComponent component = new VideoListComponent(f.toURI().toString(),(f.getName().substring(0,f.getName().length()-4)));
-                videoList.getChildren().add(component);
-                component.setOnMouseClicked(new EventHandler<MouseEvent>() {
-                    @Override
-                    public void handle(MouseEvent event) {
-                        writeVideoStatus(component.getVideoSort());
-                        gotoVideo();
-                    }
-                });
+//        File filePath = new File(getClass().getResource("videoListComponent/pic").getPath());
+//        String path = filePath.toString();
+//        path = URLDecoder.decode(path, StandardCharsets.UTF_8);
+//        System.out.println(path);
+//        File file = new File(path);
+//        File[] files = file.listFiles();
+
+        setpic("http://www.tangxinweb.cn/abdominal training.jpg","abdominal training");
+        setpic("http://www.tangxinweb.cn/HIIT.jpg","HIIT");
+        setpic("http://www.tangxinweb.cn/Hip training.jpg","Hip training");
+        setpic("http://www.tangxinweb.cn/leg training.jpg","leg training");
+        setpic("http://www.tangxinweb.cn/Recipe.jpg","Recipe");
+        setpic("http://www.tangxinweb.cn/yoga.jpg","yoga");
+
+    }
+
+    public void setpic(String url,String name){
+        VideoListComponent component = new VideoListComponent(url,name);
+        videoList.getChildren().add(component);
+        component.setOnMouseClicked(new EventHandler<MouseEvent>() {
+            @Override
+            public void handle(MouseEvent event) {
+                writeVideoStatus(component.getVideoSort());
+                gotoVideo();
             }
-        }
-//        String imagePath1 = image1.toURI().toString();
-//        videoList.getChildren().add(new VideoListComponent(imagePath1,"running"));
-//        File image2 = new File("src/main/java/sample/controllerImpl/videoListComponent/pic/soccer.jpg");
-//        String imagePath2 = image2.toURI().toString();
-//        videoList.getChildren().add(new VideoListComponent(imagePath2,"soccer"));
-//        System.out.println(imagePath2);
+        });
     }
 
 

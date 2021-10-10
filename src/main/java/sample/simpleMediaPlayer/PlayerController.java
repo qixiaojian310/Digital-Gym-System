@@ -24,6 +24,9 @@ import javafx.scene.media.MediaView;
 import javafx.stage.Stage;
 import javafx.util.Duration;
 
+import java.io.File;
+import java.io.InputStream;
+
 /**
  * Load a well-sized player into the component, and ensure that
  * when changing video resources, the user's learning record can
@@ -58,12 +61,12 @@ public class PlayerController {
     AnchorPane anchorPane;
 
     // 控件素材图片
-    private String playIcon = getClass().getResource("icon/play.png").toString();
-    private String pauseIcon = getClass().getResource("icon/pause.png").toString();
-    private String stopIcon = getClass().getResource("icon/stop.png").toString();
-    private String volOffIcon = getClass().getResource("icon/volume_off.png").toString();
-    private String volOnIcon = getClass().getResource("icon/volume_On.png").toString();
-    private String maxIcon = getClass().getResource("icon/max.png").toString();
+    private File playIcon = new File("src/main/java/sample/simpleMediaPlayer/icon/play.png");
+    private File pauseIcon = new File("src/main/java/sample/simpleMediaPlayer/icon/pause.png");
+    private File stopIcon = new File("src/main/java/sample/simpleMediaPlayer/icon/stop.png");
+    private File volOffIcon = new File("src/main/java/sample/simpleMediaPlayer/icon/volume_off.png");
+    private File volOnIcon = new File("src/main/java/sample/simpleMediaPlayer/icon/volume_On.png");
+    private File maxIcon = new File("src/main/java/sample/simpleMediaPlayer/icon/max.png");
 
     private MediaPlayer mediaPlayer;
     private Media media;
@@ -371,12 +374,12 @@ public class PlayerController {
     /**
      * Get its own corresponding icon for each button
      * @param button The button need ICON.
-     * @param path The path of the ICON picture
+     * @param file The path of the ICON picture
      * @param size The size of the ICON
      */
     // 为按钮获取图标
-    private void setIcon(Button button, String path, int size) {
-        Image icon = new Image(path);
+    private void setIcon(Button button, File file, int size) {
+        Image icon = new Image(file.toURI().toString());
         ImageView imageView = new ImageView(icon);
         imageView.setFitWidth(size);
         imageView.setFitHeight((int) (size * icon.getHeight() / icon.getWidth()));

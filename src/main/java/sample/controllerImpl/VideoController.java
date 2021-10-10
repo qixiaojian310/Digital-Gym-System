@@ -132,7 +132,12 @@ public class VideoController implements Initializable, GetLoginUserable {
             e.printStackTrace();
         }
         assembleVideoListInBox();
-        initCoverPageBox();
+        initCoverPageBox("http://www.tangxinweb.cn/abdominal training.jpg","abdominal training",0);
+        initCoverPageBox("http://www.tangxinweb.cn/HIIT.jpg","HIIT",1);
+        initCoverPageBox("http://www.tangxinweb.cn/Hip training.jpg","Hip training",2);
+        initCoverPageBox("http://www.tangxinweb.cn/leg training.jpg","leg training",3);
+        initCoverPageBox("http://www.tangxinweb.cn/Recipe.jpg","Recipe",4);
+        initCoverPageBox("http://www.tangxinweb.cn/yoga.jpg","yoga",5);
         try {
             initVideoMedia();
         } catch (IOException e) {
@@ -374,45 +379,37 @@ public class VideoController implements Initializable, GetLoginUserable {
     /**
      * Initializes the video category list of the player page and the corresponding jump events
      */
-    public void initCoverPageBox() {
-        File filePath = new File(getClass().getResource("videoListComponent/pic").getPath());
-        String path = filePath.toString();
-        path = URLDecoder.decode(path, StandardCharsets.UTF_8);
-        File file = new File(path);
-        File[] files = file.listFiles();
-        for (int i = 0; i < files.length; i++) {
-            File f = files[i];
-            if (!f.isDirectory()) {        //若非目录(即文件)，则打印
-                ImageView videoPage = new ImageView();
-                MakeCenterImage maker = new MakeCenterImage();
-                videoPage = maker.makeCenterImageRectangle(110, videoPage, f.toURI().toString());
-                videoPage.setPreserveRatio(true);
-                Button sortBtn = new Button(f.getName().substring(0, f.getName().length() - 4));
-                sortBtn.setId(sortBtn.getText());
-                sortBtn = setVideoLinkButton(sortBtn);
-                videoSortList.addRow(i, videoPage, sortBtn);
-                videoSortList.getRowConstraints().add(i, new RowConstraints());
-                videoSortList.getRowConstraints().get(i).setPrefHeight(100);
-                videoSortList.getRowConstraints().get(i).setMinHeight(100);
-                videoSortList.getRowConstraints().get(i).setMaxHeight(100);
+    public void initCoverPageBox(String path,String name,int i) {
+        ImageView videoPage = new ImageView();
+        MakeCenterImage maker = new MakeCenterImage();
+        videoPage = maker.makeCenterImageRectangle(110, videoPage, path);
+        videoPage.setPreserveRatio(true);
+        Button sortBtn = new Button(name);
+        sortBtn.setId(sortBtn.getText());
+        sortBtn = setVideoLinkButton(sortBtn);
+        videoSortList.addRow(i, videoPage, sortBtn);
+        videoSortList.getRowConstraints().add(i, new RowConstraints());
+        videoSortList.getRowConstraints().get(i).setPrefHeight(100);
+        videoSortList.getRowConstraints().get(i).setMinHeight(100);
+        videoSortList.getRowConstraints().get(i).setMaxHeight(100);
 
-                final Button finalSortBtn = sortBtn;
-                sortBtn.setOnAction(new EventHandler<ActionEvent>() {
-                    @Override
-                    public void handle(ActionEvent event) {
-                        writeVideoStatus(finalSortBtn.getText());
-                        try {
-                            getVideoStatus();
-                            readVideoInfo();
-                        } catch (IOException e) {
-                            e.printStackTrace();
-                        }
-                        assembleVideoListInBox();
-                    }
-                });
+        final Button finalSortBtn = sortBtn;
+        sortBtn.setOnAction(new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent event) {
+                writeVideoStatus(finalSortBtn.getText());
+                try {
+                    getVideoStatus();
+                    readVideoInfo();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+                assembleVideoListInBox();
             }
-        }
+        });
     }
+
+
 
     /**
      * Write the name of the playback video to a JSON file

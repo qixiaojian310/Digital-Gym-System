@@ -249,3 +249,10 @@ mvn clean javafx:run
 
 Or you can run the `running.bat` file to run our program directly
 
+### Package
+run the command of
+
+```shell
+mvn clean package
+```
+and run the code01-1.0-SNAPSHOT.jar in the target folder
